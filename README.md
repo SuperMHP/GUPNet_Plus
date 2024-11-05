@@ -99,7 +99,27 @@ NuScenes training for evaluation set (HGLS104)
     GPUS=16 GPUS_PER_NODE=8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
 ### Test
 
-updating in recent days.
+KITTI testing for evaluation set
+
+    # PyTorch DDP
+    CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_test.sh configs/gupnet_plus/gupnet_plus_dla34_kitti.py XXXXXXX/your_model.pth --eval mAP
+
+    # Slurm
+    GPUS=4 GPUS_PER_NODE=4 bash tools/slurm_test.sh YOUR_PARTITION_NAME configs/gupnet_plus/gupnet_plus_dla34_kitti.py XXXXXXX/your_model.pth --eval mAP
+
+
+KITTI testing for test set 
+
+    # 1. PyTorch DDP
+    CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_test.sh configs/gupnet_plus/gupnet_plus_dla34_kitti_trainval.py XXXXXXX/your_model.pth --format-only --eval-options 'pklfile_prefix=results/kitti_results/' 'submission_prefix=results/kitti_results/'
+
+    # 2. Slurm
+    GPUS=4 GPUS_PER_NODE=4 bash bash tools/slurn_test.sh configs/gupnet_plus/gupnet_plus_dla34_kitti_trainval.py XXXXXXX/your_model.pth --format-only --eval-options 'pklfile_prefix=results/kitti_results/' 'submission_prefix=results/kitti_results/'
+
+    # 3. zip files
+    zip -r -j submit.zip results/kitti_results/img_bbox
+
+    #4. submitting submit.zip on KITTI web
 
 ## Contact
 
