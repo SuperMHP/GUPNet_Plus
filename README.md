@@ -61,8 +61,6 @@ This project is based on [mmdetection3d repository](https://github.com/open-mmla
 
 ### Train
 
-#### GUPNet++
-
 KITTI training for evaluation set
 
     # PyTorch DDP
@@ -97,6 +95,11 @@ NuScenes training for evaluation set (HGLS104)
 
     # Slurm
     GPUS=16 GPUS_PER_NODE=8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
+
+NuScenes training for test set (DLA34)
+
+    coming soon
+
 ### Test
 
 KITTI testing for evaluation set
@@ -120,6 +123,10 @@ KITTI testing for test set
     zip -r -j submit.zip results/kitti_results/img_bbox
 
     #4. submitting submit.zip on KITTI web
+
+## Checkpoints
+
+    coming soon
 
 ## Contact
 
