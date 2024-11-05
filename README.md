@@ -10,7 +10,7 @@ If you find our work useful in your research, please consider citing:
 
     @article{lu2024gupnet++,
     title={Gupnet++: geometry uncertainty propagation network for monocular 3D object detection},
-    author={Lu, Yan and Ma, Xinzhu and Yang, Lei and Zhang, Tianzhu and Liu, Yating and Chu, Qi and He, Tong and Li, Yonghui and    Ouyang,  Wanli},
+    author={Lu, Yan and Ma, Xinzhu and Yang, Lei and Zhang, Tianzhu and Liu, Yating and Chu, Qi and He, Tong and Li, Yonghui and Ouyang,  Wanli},
     journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
     year={2024},
     publisher={IEEE}
@@ -21,6 +21,38 @@ If you find our work useful in your research, please consider citing:
     journal={arXiv preprint arXiv:2107.13774},year={2021}}
 
 ## Usage
+
+### Installation
+
+You can refer to the original mmdetection README to install the requirements [English](MMDET_README.md) | [简体中文](MMDET_README_zh-CN.md). Here we provide our accurate steps corresponding to our experiment environments with specific version packages:
+
+1. install mmcv
+
+        pip install mmcv-full==1.6.0
+
+2. install mmdetection
+
+        git clone https://github.com/open-mmlab/mmdetection.git
+        cd mmdetection
+        git checkout v2.24.0  # switch to v2.24.0 branch (2.25.0 is also ok)
+        pip install -r requirements/build.txt
+        pip install -v -e .  #
+        cd ..
+
+3. install mmsegmentaion
+
+        pip install mmsegmentation==0.26.0
+
+4. install mmdetection3d (current repo)
+
+        git clone https://github.com/SuperMHP/GUPNet_Plus.git
+        cd GUPNet_Plus
+        pip install -v -e .
+
+
+### Train
+
+### Test
 
 updating in recent days.
 
