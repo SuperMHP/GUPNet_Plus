@@ -67,7 +67,7 @@ KITTI training for evaluation set
 
     # PyTorch DDP
     CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_kitti.py
-    
+
     # Slurm
     GPUS=4 GPUS_PER_NODE=4 bash tools/slurm_train.sh YOUR_PARTITION_NAME configs/gupnet_plus/gupnet_plus_dla34_kitti.py
 
@@ -82,7 +82,7 @@ KITTI training for test set
 NuScenes training for evaluation set (DLA34)
 
     # PyTorch DDP
-    CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_nuscenes.py
+    CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_nuscenes.py
 
     # Slurm
     GPUS=8 GPUS_PER_NODE=8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_nuscenes.py
@@ -91,9 +91,9 @@ NuScenes training for evaluation set (HGLS104)
 
     # PyTorch DDP
     ## node 1
-    MASTER_ADDR=YOUR_MASTER_ADDR NNODES=2 NODE_RANK=0 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
+    MASTER_ADDR=YOUR_MASTER_ADDR NNODES=2 NODE_RANK=0 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
     ## node 2
-    MASTER_ADDR=YOUR_MASTER_ADDR NNODES=2 NODE_RANK=1 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
+    MASTER_ADDR=YOUR_MASTER_ADDR NNODES=2 NODE_RANK=1 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
 
     # Slurm
     GPUS=16 GPUS_PER_NODE=8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
