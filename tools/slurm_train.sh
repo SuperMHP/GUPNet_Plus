@@ -12,7 +12,7 @@ SRUN_ARGS=${SRUN_ARGS:-""}
 PY_ARGS=${@:3}
 
 PYTHONPATH="$(dirname $0)/..":$PYTHONPATH \
-MASTER_PORT=$RANDOM srun -p ai4science \
+MASTER_PORT=$RANDOM srun -p ${PARTITION} \
      --quotatype=${QUOTATYPE} \
      --gres=gpu:${GPUS_PER_NODE} \
      --ntasks=${GPUS} \
