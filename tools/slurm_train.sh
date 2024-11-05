@@ -2,17 +2,15 @@
 
 set -x
 
-CONFIG=$1
+PARTITION=$1
+CONFIG=$2
 GPUS=${GPUS:-4}
 GPUS_PER_NODE=${GPUS_PER_NODE:-4}
 CPUS_PER_TASK=${CPUS_PER_TASK:-10}
 QUOTATYPE=${QUOTATYPE:-'reserved'}
-RUN_NUM=${RUN_NUM:-1}
 SRUN_ARGS=${SRUN_ARGS:-""}
-PY_ARGS=${@:2}
+PY_ARGS=${@:3}
 
-for((i=1; i<=$RUN_NUM; i++));
-do   
 PYTHONPATH="$(dirname $0)/..":$PYTHONPATH \
 MASTER_PORT=$RANDOM srun -p ai4science \
      --quotatype=${QUOTATYPE} \
@@ -24,4 +22,3 @@ MASTER_PORT=$RANDOM srun -p ai4science \
      --preempt \
      ${SRUN_ARGS} \
      python -u tools/train.py ${CONFIG} --launcher="slurm" ${PY_ARGS}
-done

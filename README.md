@@ -57,9 +57,18 @@ This project is based on [mmdetection3d repository](https://github.com/open-mmla
 
 6. Putting the datasets as following directory
 
-    
+
 ### Train
 
+PyTorch Dist Train
+
+    $ KITTI for evaluation set
+    CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_kitti.py
+
+Slurm Train
+
+    $ KITTI for evaluation set
+    GPUS=4 GPUS_PER_NODE=4 bash tools/slurm_train.sh YOUR_PARTITION_NAME configs/gupnet_plus/gupnet_plus_dla34_kitti.py
 ### Test
 
 updating in recent days.
