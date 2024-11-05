@@ -57,18 +57,39 @@ This project is based on [mmdetection3d repository](https://github.com/open-mmla
 
 6. Putting the datasets as following directory
 
+    updating in recent days.
 
 ### Train
 
-PyTorch Dist Train
+#### GUPNet++
 
-    $ KITTI for evaluation set
+KITTI training for evaluation set
+
+    # PyTorch DDP
     CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_kitti.py
-
-Slurm Train
-
-    $ KITTI for evaluation set
+    # Slurm
     GPUS=4 GPUS_PER_NODE=4 bash tools/slurm_train.sh YOUR_PARTITION_NAME configs/gupnet_plus/gupnet_plus_dla34_kitti.py
+
+KITTI training for test set 
+
+    # PyTorch DDP
+    CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_kitti_trainval.py
+    # Slurm
+    GPUS=4 GPUS_PER_NODE=4 bash tools/slurm_train.sh YOUR_PARTITION_NAME configs/gupnet_plus/gupnet_plus_dla34_kitti_trainval.py
+
+NuScenes training for evaluation set (DLA34)
+
+    # PyTorch DDP
+    CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_nuscenes.py
+    # Slurm
+    GPUS=8 GPUS_PER_NODE=8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_dla34_nuscenes.py
+    
+NuScenes training for evaluation set (HGLS104)
+
+    # PyTorch DDP
+    CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
+    # Slurm
+    GPUS=8 GPUS_PER_NODE=8 bash tools/dist_train.sh configs/gupnet_plus/gupnet_plus_hgls104_nuscenes.py
 ### Test
 
 updating in recent days.
