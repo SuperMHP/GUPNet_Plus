@@ -20,11 +20,11 @@ If you find our work useful in your research, please consider citing:
     author={Lu, Yan and Ma, Xinzhu and Yang, Lei and Zhang, Tianzhu and Liu, Yating and Chu, Qi and Yan, Junjie and Ouyang, Wanli},
     journal={arXiv preprint arXiv:2107.13774},year={2021}}
 
-## Usage
+## Usage 
 
 ### Installation
 
-You can refer to the original mmdetection README to install the requirements [English](MMDET_README.md) | [简体中文](MMDET_README_zh-CN.md). Here we provide our accurate steps corresponding to our experiment environments with specific version packages:
+This project is based on [mmdetection3d repository](https://github.com/open-mmlab/mmdetection3d). You can refer to the original mmdetection3d README to install the requirements [English](MMDET_README.md) | [简体中文](MMDET_README_zh-CN.md). Here we provide our accurate steps corresponding to our experiment environments with specific version packages:
 
 1. install mmcv
 
@@ -49,7 +49,15 @@ You can refer to the original mmdetection README to install the requirements [En
         cd GUPNet_Plus
         pip install -v -e .
 
+5. Downloading datasets. 
 
+    [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d), including left color images, camera calibration matrices and training labels. 
+
+    [NuScenes](https://www.nuscenes.org/nuscenes#download), including Mini, Trainval, Test of Full dataset (v1.0).
+
+6. Putting the datasets as following directory
+
+    
 ### Train
 
 ### Test
