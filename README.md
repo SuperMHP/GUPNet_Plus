@@ -128,12 +128,12 @@ KITTI testing for test set
 
     coming soon
 
-### ⚠️ Known Issues
+## ⚠️ Known Issues
 
 #### An implementation bug about the β-NLL trick
 
 **Description:**
-In the 192 $th$-200 $th$ and 248 $th$-256 $th$ lines in the `mmdet3d/models/losses/uncertain_smooth_l1_loss.py`, we implement the β-NLL trick as follows:
+In the 192 $th$-200 lines in the `mmdet3d/models/losses/uncertain_smooth_l1_loss.py`, we implement the β-NLL trick as follows:
 
     loss_bbox = torch.exp(self.beta*sigma.detach()) * (self.loss_weight)**(-self.beta) * \
             (self.loss_weight * uncertain_l1_loss(
