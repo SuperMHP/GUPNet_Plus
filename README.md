@@ -128,6 +128,44 @@ KITTI testing for test set
 
     coming soon
 
+### ⚠️ Known Issues
+
+#### An implementation bug about the β-NLL trick
+
+**Description:**
+In the 192 $th$-200 $th$ and 248 $th$-256 $th$ lines in the `mmdet3d/models/losses/uncertain_smooth_l1_loss.py`, we implement the β-NLL trick as follows:
+
+    loss_bbox = torch.exp(self.beta*sigma.detach()) * (self.loss_weight)**(-self.beta) * \
+            (self.loss_weight * uncertain_l1_loss(
+            pred,
+            target,
+            weight,
+            sigma=sigma,
+            alpha=self.alpha,
+            reduction=reduction,
+            avg_factor=avg_factor))
+
+Due to our oversight, `reduction` still maintained the default setting of mmdetetcion as `'mean'`, leading to the actual behavior of the loss from the expected function: 
+
+$$\mathcal{L}^{\text{expected}}_{\beta\text{-NLL}} = \mathbb{E}_{i} \left[ \underbrace{\left\lfloor \frac{\sigma_{i}}{\sqrt{2}} \right\rfloor^\beta}_{\text{sample-wise}} \left( \frac{\sqrt{2}}{\sigma_i} |\mu_i - gt_i| + \log \sigma_i \right) \right],$$
+
+where $N$ is the batch size, transferred to:
+
+$$\mathcal{L}^{\text{actual}}_{\beta\text{-NLL}} = \mathbb{E}_{i}\left[\underbrace{\mathbb{E}_{i} \left[ \left\lfloor \frac{\sigma_{i}}{\sqrt{2}} \right\rfloor^\beta\right]}_{\text{bacth-wise}}\left( \frac{\sqrt{2}}{\sigma_i} |\mu_i - gt_i| + \log \sigma_i \right)\right].$$
+    
+**Impact Analysis**:
+* **Mechanism:**  This results in a batch-wise (group-wise) weighting mechanism rather than a strict sample-wise one.
+* **Effectiveness:** Our ablation studies and final performance reported in the paper are based on this implementation, demonstrating its effectiveness.
+* **Reasoning:** Consistent with the motivation in our paper, the goal of the β-NLL loss is to "control the trade-off between uncertainty-based learning and traditional L1 regression optimization" and to mitigate the negative effects when "dealing with datasets with higher variance."
+* **Conclusion**: Although the weighting became batch-wise, our analysis suggests it still functions effectively as a coarse-grained regularizer. When a batch (or the majority of samples within it) exhibits high uncertainty (large $\sigma$), the averaged weighting coefficient decreases, globally down-weighting the loss for that batch. This effectively prevents the training from being dominated by unstable gradients while preserving the core benefit of the uncertainty modeling discussed in the original paper.
+
+**Recommendation:**
+* **For Strict Reproduction:** To reproduce the exact results reported in the paper, please use the original code (with the implicit mean reduction).
+* **For New Research:** If you aim to use the strict sample-wise β-NLL, please set `reduction='none'`. However, please note that this setting differs from our original implementation and has not been experimentally verified by us.
+
+**Acknowledgement:**
+We thank **@dornd2000** for identifying this implementation detail and providing valuable insights.
+
 ## Contact
 
 If you have any question about this project, please feel free to contact yan.lu1@sydney.edu.au or luyan@pjlab.org.cn.
